@@ -20,7 +20,7 @@ void execute_instruction( Processor* processor ) {
 
 	switch( instruction ) {
 		case LDA_IM: {
-			byte value = read_address( processor, &( processor->address_bus ), processor->program_counter++ );
+			byte value = read_address( &( processor->address_bus ), processor->program_counter++ );
 
 			processor->accumulator_register = value;
 
