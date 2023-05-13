@@ -24,6 +24,9 @@
     <ClCompile Include="processor\processor.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="memory\pmemory.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="util\console_utils.h">

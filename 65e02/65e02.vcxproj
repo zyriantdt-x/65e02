@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
+    <ClCompile Include="memory\pmemory.c" />
     <ClCompile Include="processor\processor.c" />
     <ClCompile Include="util\console_utils.c" />
   </ItemGroup>

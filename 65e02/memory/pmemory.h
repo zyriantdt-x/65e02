@@ -14,3 +14,7 @@ typedef struct {
 	byte io[ MAX_IO ];
 	byte rom[ MAX_ROM ];
 } Memory;
+
+void reset_memory( Memory* memory );
+void set_memory( Memory* memory, word address, byte value, size_t total_bytes );
+void write_address( Memory* memory, word address, byte value );

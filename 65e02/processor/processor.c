@@ -10,4 +10,7 @@ void reset_processor( Processor* processor ) {
 	processor->accumulator_register = 0x00;
 	processor->x_register			= 0x00;
 	processor->y_register			= 0x00;
+
+	// reset memory
+	reset_memory( &( processor->address_bus ) );
 }
