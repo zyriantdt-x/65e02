@@ -4,6 +4,8 @@
 #include "../memory/pmemory.h"
 
 typedef struct {
+	bool processor_halted;
+
 	// specialist registers
 	word	program_counter;
 	byte	stack_pointer;
