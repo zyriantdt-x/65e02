@@ -17,4 +17,4 @@ typedef struct {
 	Memory address_bus;
 } Processor;
 
-void reset_processor( Processor* processor );
+void reset_processor( Processor* processor, byte rom_image[ MAX_ROM ] );
