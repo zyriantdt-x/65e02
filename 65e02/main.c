@@ -47,8 +47,7 @@ int main( int argc, char* argv[] ) {
 	// start processor
 	reset_processor( &processor, rom_image );
 
-	int i = 3;
-	while( i-- > 0 ) {
+	while( !processor.halted ) {
 		execute_instruction( &processor );
 		print_processor_data( &processor );
 	}

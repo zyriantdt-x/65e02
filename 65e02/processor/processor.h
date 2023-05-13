@@ -4,7 +4,7 @@
 #include "../memory/pmemory.h"
 
 typedef struct {
-	bool processor_halted;
+	bool	halted;
 
 	// specialist registers
 	word	program_counter;
