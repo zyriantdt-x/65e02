@@ -6,7 +6,7 @@ typedef struct {
 	// specialist registers
 	word	program_counter;
 	byte	stack_pointer;
-	byte	processor_status;	// carry, zero, interrupt disable, decimal mode, break command, overflow, negative
+	byte	processor_status;	// carry, zero, interrupt disable, decimal mode, break command, break command, overflow, negative
 
 	// general purpose registers
 	byte	accumulator_register;
@@ -17,3 +17,4 @@ typedef struct {
 	Memory address_bus;
 } Processor;
 
+void reset_processor( Processor* processor );
