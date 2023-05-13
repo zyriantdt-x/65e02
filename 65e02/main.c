@@ -1,4 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "processor/processor.h"
@@ -36,8 +37,8 @@ int main( int argc, char* argv[] ) {
 	fseek( image_handle, 0, SEEK_END );			// seek to end of file
 	long image_size = ftell( image_handle );	// get current file pointer
 	fseek( image_handle, 0, SEEK_SET );			// seek to beginning of file
-	if( image_size > 32768 ) {
-		printf( "Binary image must be 32kb" );
+	if( image_size != 32768 ) {
+		printf( "ROM image must be 32kb" );
 		return EXIT_SUCCESS;
 	}
 
