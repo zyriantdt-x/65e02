@@ -1,5 +1,6 @@
 #pragma once
 #include "processor_types.h"
+#include "instructions/instructions.h"
 #include "../memory/pmemory.h"
 
 typedef struct {
@@ -18,3 +19,5 @@ typedef struct {
 } Processor;
 
 void reset_processor( Processor* processor, byte rom_image[ MAX_ROM ] );
+
+void execute_instruction( Processor* processor );
