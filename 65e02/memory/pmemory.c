@@ -42,7 +42,7 @@ void load_rom( Memory* memory, byte rom_image[ MAX_ROM ] ) {
 	size_t total_bytes = MAX_ROM;
 	word address = 0x0000;
 	while( total_bytes-- > 0 ) {
-		write_address( memory, address, rom_image[ address++ ] );
+		write_address( memory, address + ROM_START, rom_image[ address++ ] );
 	}
 
 	memory->rom_write_protected = true;
