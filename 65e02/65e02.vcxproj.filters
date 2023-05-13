@@ -32,5 +32,8 @@
     <ClInclude Include="processor\processor_types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="memory\pmemory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

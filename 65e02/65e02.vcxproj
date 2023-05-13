@@ -143,6 +143,7 @@
     <ClCompile Include="util\console_utils.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="memory\pmemory.h" />
     <ClInclude Include="processor\processor.h" />
     <ClInclude Include="processor\processor_types.h" />
     <ClInclude Include="util\console_utils.h" />
