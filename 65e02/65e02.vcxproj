@@ -143,12 +143,16 @@
     <ClCompile Include="memory\pmemory.c" />
     <ClCompile Include="processor\processor.c" />
     <ClCompile Include="util\console_utils.c" />
+    <ClCompile Include="util\debug_utils.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="memory\pmemory.h" />
+    <ClInclude Include="processor\instructions\instructions.h" />
+    <ClInclude Include="processor\instructions\instruction_set.h" />
     <ClInclude Include="processor\processor.h" />
     <ClInclude Include="processor\processor_types.h" />
     <ClInclude Include="util\console_utils.h" />
+    <ClInclude Include="util\debug_utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

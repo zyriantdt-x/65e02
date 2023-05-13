@@ -27,6 +27,9 @@
     <ClCompile Include="memory\pmemory.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="util\debug_utils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="util\console_utils.h">
@@ -39,6 +42,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="memory\pmemory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="processor\instructions\instructions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="processor\instructions\instruction_set.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\debug_utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
