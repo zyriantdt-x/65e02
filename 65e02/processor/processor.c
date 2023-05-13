@@ -19,7 +19,7 @@ void execute_instruction( Processor* processor ) {
 	Instruction instruction = read_address( &( processor->address_bus ), processor->program_counter++ );
 
 	switch( instruction ) {
-		case LDA_IM: {
+		case LDA_IMM8: {
 			byte value = read_address( &( processor->address_bus ), processor->program_counter++ );
 
 			processor->accumulator_register = value;
@@ -29,7 +29,6 @@ void execute_instruction( Processor* processor ) {
 
 			// if bit 7 is enabled, set negative flag
 			if( ( value & 0b10000000 ) > 0 ) processor->processor_status = processor->processor_status | 0b00000001;
-
 			break;
 		}
 		default: {
