@@ -26,5 +26,11 @@
     <ClInclude Include="util\console_utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="processor\processor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="processor\processor_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
