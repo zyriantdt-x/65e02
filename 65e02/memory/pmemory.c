@@ -47,3 +47,12 @@ void load_rom( Memory* memory, byte rom_image[ MAX_ROM ] ) {
 
 	memory->rom_write_protected = true;
 }
+
+byte read_address( Memory* memory, word address ) {
+	if( address >= ROM_START )
+		return memory->rom[ address - ROM_START ];
+	if( address >= IO_START )
+		return memory->io[ address - IO_START ];
+	if( address >= RAM_START )
+		return memory->ram[ address - RAM_START ];
+}
