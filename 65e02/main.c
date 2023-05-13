@@ -6,7 +6,9 @@
 Processor processor;
 
 int main( int argc, char* argv[] ) {
-	reset_processor( &processor );
+	byte rom_image[ MAX_ROM ];
+
+	reset_processor( &processor, rom_image );
 
 	return EXIT_SUCCESS;
 }
