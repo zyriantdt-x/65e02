@@ -1,10 +1,13 @@
 #pragma once
+#include <Windows.h>
+#include <time.h>
 #include "processor_types.h"
 #include "instructions/instructions.h"
 #include "../memory/pmemory.h"
 
 typedef struct {
 	bool	halted;
+	bool	simulating;
 
 	// specialist registers
 	word	program_counter;
@@ -23,3 +26,5 @@ typedef struct {
 void reset_processor( Processor* processor, byte rom_image[ MAX_ROM ] );
 
 void execute_instruction( Processor* processor );
+
+void run_processor( Processor* processor );

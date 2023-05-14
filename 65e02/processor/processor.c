@@ -22,6 +22,7 @@ void execute_instruction( Processor* processor ) {
 	Instruction instruction = read_address( &( processor->address_bus ), processor->program_counter++ );
 
 	switch( instruction ) {
+		// LDA -> load accumulator
 		case LDA_IMM8: {
 			// get imm8 value
 			byte value = read_address( &( processor->address_bus ), processor->program_counter++ );
@@ -37,6 +38,7 @@ void execute_instruction( Processor* processor ) {
 
 			break;
 		}
+		// ADC -> add with carry
 		case ADC_IMM8: {
 			// get numbers to add
 			byte additional_value	= read_address( &( processor->address_bus ), processor->program_counter++ );
@@ -59,9 +61,25 @@ void execute_instruction( Processor* processor ) {
 
 			break;
 		}
+		// JMP -> jump
+		case JMP_IMM16: {
+			// get address
+			byte low_byte = read_address( &( processor->address_bus ), processor->program_counter++ );
+			byte high_byte = read_address( &( processor->address_bus ), processor->program_counter++ );
+
+			// combine bytes
+			word jump_address = ( high_byte << 8 ) | low_byte;
+
+			processor->program_counter = jump_address;
+			break;
+		}
 		default: {
 			processor->halted = true;
 			break;
 		}
 	}
+}
+
+void run_processor( Processor* processor ) {
+	processor->simulating = true;
 }

@@ -48,10 +48,11 @@ int main( int argc, char* argv[] ) {
 	// start processor
 	reset_processor( &processor, rom_image );
 
-	while( !processor.halted ) {
+	/*while( !processor.halted ) {
 		execute_instruction( &processor );
 		print_processor_data( &processor );
-	}
+		Sleep( 1000 );
+	}*/
 
 	return EXIT_SUCCESS;
 }
