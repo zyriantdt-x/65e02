@@ -13,11 +13,11 @@ void reset_memory( Memory* memory, byte rom_image[ MAX_ROM ] ) {
 
 void set_memory( Memory* memory, word address, byte value, size_t total_bytes ) {
 	while( total_bytes-- > 0 ) {
-		write_address( memory, address++, value );
+		write_address_m( memory, address++, value );
 	}
 }
 
-void write_address( Memory* memory, word address, byte value ) {
+void write_address_m( Memory* memory, word address, byte value ) {
 	if( address >= ROM_START ) {
 		if( memory->rom_write_protected ) {
 			// do something here?
@@ -42,14 +42,14 @@ void load_rom( Memory* memory, byte rom_image[ MAX_ROM ] ) {
 	size_t total_bytes = MAX_ROM;
 	word address = 0x0000;
 	while( total_bytes-- > 0 ) {
-		write_address( memory, address + ROM_START, rom_image[ address ] );
+		write_address_m( memory, address + ROM_START, rom_image[ address ] );
 		address++;
 	}
 
 	memory->rom_write_protected = true;
 }
 
-byte read_address( Memory* memory, word address ) {
+byte read_address_m( Memory* memory, word address ) {
 	if( address >= ROM_START )
 		return memory->rom[ address - ROM_START ];
 	if( address >= IO_START )

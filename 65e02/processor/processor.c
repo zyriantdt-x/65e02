@@ -22,15 +22,13 @@ void reset_processor( Processor* processor, byte rom_image[ MAX_ROM ] ) {
 }
 
 void execute_instruction( Processor* processor ) {
-	Instruction instruction = read_address( &( processor->address_bus ), processor->program_counter++ );
-	cycle_processor( processor );
+	Instruction instruction = read_address_cycle( processor );
 
 	switch( instruction ) {
 		// LDA -> load accumulator
 		case LDA_IMM8: {
 			// get imm8 value
-			byte value = read_address( &( processor->address_bus ), processor->program_counter++ );
-			cycle_processor( processor );
+			byte value = read_address_cycle( processor );
 
 			// load accumulator with value
 			processor->accumulator_register = value;
@@ -46,8 +44,7 @@ void execute_instruction( Processor* processor ) {
 		// ADC -> add with carry
 		case ADC_IMM8: {
 			// get numbers to add
-			byte additional_value	= read_address( &( processor->address_bus ), processor->program_counter++ );
-			cycle_processor( processor );
+			byte additional_value	= read_address_cycle( processor );
 			byte accumulator_value	= processor->accumulator_register;
 
 			// calculator sum
@@ -70,15 +67,26 @@ void execute_instruction( Processor* processor ) {
 		// JMP -> jump
 		case JMP_IMM16: {
 			// get address
-			byte low_byte = read_address( &( processor->address_bus ), processor->program_counter++ );
-			cycle_processor( processor );
-			byte high_byte = read_address( &( processor->address_bus ), processor->program_counter++ );
-			cycle_processor( processor );
+			byte low_byte = read_address_cycle( processor );
+			byte high_byte = read_address_cycle( processor );
 
 			// combine bytes
 			word jump_address = ( high_byte << 8 ) | low_byte;
 
 			processor->program_counter = jump_address;
+			break;
+		}
+		// STA -> store accumulator
+		case STA_IMM16: {
+			// get imm16 address
+			byte low_byte = read_address_cycle( processor );
+			byte high_byte = read_address_cycle( processor );
+
+			// combine bytes
+			word address = ( high_byte << 8 ) | low_byte;
+
+			// write to location
+			write_address_cycle_a( processor, address, processor->accumulator_register );
 			break;
 		}
 		default: {
@@ -89,8 +97,30 @@ void execute_instruction( Processor* processor ) {
 	}
 }
 
-void cycle_processor( Processor* processor ) {
+void clock_timeout( Processor* processor ) {
 	while( clock() < processor->last_cycle + CLOCKS_PER_SEC ) { Sleep( 1 ); } // 1 (and a bit?) hz
 	print_processor_data( processor );
 	processor->last_cycle = clock();
+}
+
+void write_address_cycle( Processor* processor, byte value ) {
+	write_address_m( &( processor->address_bus ), processor->program_counter++, value);
+	clock_timeout( processor );
+}
+
+byte read_address_cycle( Processor* processor ) {
+	byte data = read_address_m( &( processor->address_bus ), processor->program_counter++ );
+	clock_timeout( processor );
+	return data;
+}
+
+void write_address_cycle_a( Processor* processor, word address, byte value ) {
+	write_address_m( &( processor->address_bus ), address, value );
+	clock_timeout( processor );
+}
+
+byte read_address_cycle_a( Processor* processor, word address ) {
+	byte data = read_address_m( &( processor->address_bus ), address );
+	clock_timeout( processor );
+	return data;
 }

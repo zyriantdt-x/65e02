@@ -32,4 +32,10 @@ void reset_processor( Processor* processor, byte rom_image[ MAX_ROM ] );
 
 void execute_instruction( Processor* processor );
 
-void cycle_processor( Processor* processor );
+void clock_timeout( Processor* processor );
+
+void write_address_cycle( Processor* processor, byte value );
+byte read_address_cycle( Processor* processor );
+
+void write_address_cycle_a( Processor* processor, word address, byte value );
+byte read_address_cycle_a( Processor* processor, word address );

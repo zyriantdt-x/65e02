@@ -22,5 +22,6 @@ void reset_memory( Memory* memory, byte rom_image[ MAX_ROM ] );
 void set_memory( Memory* memory, word address, byte value, size_t total_bytes );
 
 void load_rom( Memory* memory, byte rom_image[ MAX_ROM ] );
-void write_address( Memory* memory, word address, byte value );
-byte read_address( Memory* memory, word address );
+
+void write_address_m( Memory* memory, word address, byte value );
+byte read_address_m( Memory* memory, word address );
