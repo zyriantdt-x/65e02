@@ -15,17 +15,22 @@ void reset_processor( Processor* processor, byte rom_image[ MAX_ROM ] ) {
 	reset_memory( &( processor->address_bus ), rom_image );
 
 	// unhalt processor
-	processor->halted = false;
+	processor->halted				= false;
+
+	// set clock
+	processor->last_cycle			= clock();
 }
 
 void execute_instruction( Processor* processor ) {
 	Instruction instruction = read_address( &( processor->address_bus ), processor->program_counter++ );
+	cycle_processor( processor );
 
 	switch( instruction ) {
 		// LDA -> load accumulator
 		case LDA_IMM8: {
 			// get imm8 value
 			byte value = read_address( &( processor->address_bus ), processor->program_counter++ );
+			cycle_processor( processor );
 
 			// load accumulator with value
 			processor->accumulator_register = value;
@@ -42,6 +47,7 @@ void execute_instruction( Processor* processor ) {
 		case ADC_IMM8: {
 			// get numbers to add
 			byte additional_value	= read_address( &( processor->address_bus ), processor->program_counter++ );
+			cycle_processor( processor );
 			byte accumulator_value	= processor->accumulator_register;
 
 			// calculator sum
@@ -65,7 +71,9 @@ void execute_instruction( Processor* processor ) {
 		case JMP_IMM16: {
 			// get address
 			byte low_byte = read_address( &( processor->address_bus ), processor->program_counter++ );
+			cycle_processor( processor );
 			byte high_byte = read_address( &( processor->address_bus ), processor->program_counter++ );
+			cycle_processor( processor );
 
 			// combine bytes
 			word jump_address = ( high_byte << 8 ) | low_byte;
@@ -74,12 +82,15 @@ void execute_instruction( Processor* processor ) {
 			break;
 		}
 		default: {
+			// i want to do a memory dump here - this is technically a crash.
 			processor->halted = true;
 			break;
 		}
 	}
 }
 
-void run_processor( Processor* processor ) {
-	processor->simulating = true;
+void cycle_processor( Processor* processor ) {
+	while( clock() < processor->last_cycle + CLOCKS_PER_SEC ) { Sleep( 1 ); } // 1 (and a bit?) hz
+	print_processor_data( processor );
+	processor->last_cycle = clock();
 }

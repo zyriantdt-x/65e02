@@ -3,12 +3,12 @@
 void print_processor_data( Processor* processor ) {
 	// print program counter register
 	char program_counter_string[ 16 ];
-	snprintf( program_counter_string, 16, "PC = %x", processor->program_counter );
+	snprintf( program_counter_string, 16, "PC = %X", processor->program_counter );
 	console_print_at( 0, 0, program_counter_string );
 
 	// print stack pointer register
 	char stack_pointer_string[ 16 ];
-	snprintf( stack_pointer_string, 16, "SP = %x", processor->stack_pointer );
+	snprintf( stack_pointer_string, 16, "SP = %X", processor->stack_pointer );
 	console_print_at( 0, 1, stack_pointer_string );
 
 	// print status flags register
@@ -18,6 +18,8 @@ void print_processor_data( Processor* processor ) {
 
 	// print accumulator register
 	char accumulator_string[ 16 ];
-	snprintf( accumulator_string, 16, "A = %x", processor->accumulator_register );
+	snprintf( accumulator_string, 16, "A = %X", processor->accumulator_register );
 	console_print_at( 0, 3, accumulator_string );
+
+	// should i free everything? /shrug
 }
